@@ -21,8 +21,6 @@ PROTO DoorLever [
   field SFFloat    mass             0.7                  # Defines the mass of the lever.
   field SFBool     hasStaticParent  FALSE                # Defines whether the parent door has physics or not.
   field SFBool     castShadows      TRUE                 # Defines whether this object should cast shadows.
-  field SFFloat    lockYOffset      0.12                 # Defines the y offset of the lock.
-  field SFFloat    lockZoffset      0.12                 # Defines the z offset of the lock.
 ]
 {
   %<
@@ -51,8 +49,6 @@ PROTO DoorLever [
     }
 
     const mirrorFactor = fields.jointAtLeft.value ? -1 : 1;
-    const lockYOffset = fields.lockYOffset.value;
-    const lockZoffset = fields.lockZoffset.value;
 
     const axisHeight = distanceFromDoor * 2 + doorThickness;
     const handlePositionX = axisHeight * 0.5;
@@ -95,10 +91,16 @@ PROTO DoorLever [
           endPoint Solid {
             children [
               Solid {
-                translation %<= - doorThickness / 2 >% <%= lockYOffset >% <%= lockZoffset>
-                boundingObject Box {
-                  size %<= doorThickness >% 0.01 0.02
-                }
+                translation %<= -doorThickness / 2 + doorThickness / 8  + 0.001>% 0.0725 0.3
+                children [
+                  Shape {
+                    appearance IS appearance
+                    geometry DEF LOCK Box {
+                      size %<= doorThickness / 4 >% 0.045 0.01
+                    }
+                  }
+                ]
+                boundingObject USE LOCK
                 physics Physics {}
               }
       %< } >%

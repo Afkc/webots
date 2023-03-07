@@ -123,12 +123,38 @@ PROTO DoorWithLock [
         appearance IS frameAppearance
         castShadows IS castShadows
       }
-      SolidBox { # right frame
+      Solid { # right frame
         translation 0 %<= 0.5 * size.y - 0.5 * frameSize.y >% %<= 0.5 * frameHeight >%
         name "right frame"
-        size %<= 2 * frameSize.x + size.x >% %<= frameSize.y >% %<= frameHeight >%
-        appearance IS frameAppearance
-        castShadows IS castShadows
+        children [
+          Shape {
+            appearance IS frameAppearance
+            geometry Box {
+              size %<= 2 * frameSize.x + size.x >% %<= frameSize.y >% %<= frameHeight >%
+            }
+            castShadows IS castShadows
+          }
+        ]
+        boundingObject Group {
+          children [
+            Transform {
+              translation %<= - doorThickness / 4 >% 0 0
+              children [
+                Box {
+                  size %<= 2 * frameSize.x + size.x  - doorThickness / 2 >% %<= frameSize.y >% %<= frameHeight >%
+                }
+              ]
+            }
+            Transform {
+              translation %<= frameSize.x + size.x / 2 + (doorThickness * 0.25 / 2) + 0.001>% 0.01 0
+              children [
+                Box {
+                  size %<= doorThickness * 0.75 - 0.001 >% %<= frameSize.y >% %<= frameHeight >%
+                }
+              ]
+            }
+          ]
+        }
       }
       %< if (fields.canBeOpen.value) { >%
         HingeJoint {
@@ -137,11 +163,11 @@ PROTO DoorWithLock [
             anchor %<= 0.5 * size.x + frameSize.x >% %<= mirrorFactor * (0.5 * size.y - frameSize.y) >% %<= 0.5 * frameHeight >%
             axis 0 0 1
             %< if (mirrorFactor > 0) { >%
-              minStop -0.01
+              minStop 0
               maxStop 1.57
             %< } else { >%
               minStop -1.57
-              maxStop 0.01
+              maxStop 0
             %< } >%
             %< if (fields.selfClosing.value) { >%
               springConstant 5
@@ -151,7 +177,6 @@ PROTO DoorWithLock [
           endPoint
       %< } >%
           Solid {
-            translation 0.001 0 0 # small offset to not generates collisions
             children [
               Transform { # door
                 translation %<= 0.5 * size.x + frameSize.x + 0.25 * doorThickness >% 0.005 %<= 0.5 * (frameHeight - frameSize.z) + spaceUnderDoor >%
@@ -178,7 +203,7 @@ PROTO DoorWithLock [
                 ]
               }
               Transform { # handle
-                translation %<= 0.5 * size.x + frameSize.x >% %<= - mirrorFactor * 0.4 * size.y >% %<= 0.5 * frameHeight >%
+                translation %<= 0.5 * size.x + frameSize.x >% %<= - mirrorFactor * ((size.y - 2 * frameSize.y) / 2 - 0.05) >% %<= 0.5 * frameHeight >%
                 children [
                   Slot {
                     type "door handle"
