@@ -91,13 +91,17 @@ PROTO DoorLever [
           endPoint Solid {
             children [
               Solid {
-                translation %<= -doorThickness / 2 + doorThickness / 8  + 0.001>% 0.0725 0.3
+                translation %<= -doorThickness / 2 + doorThickness / 8  + 0.001>% 0.055 0.02
                 children [
                   Shape {
                     appearance IS appearance
                     geometry DEF LOCK Box {
-                      size %<= doorThickness / 4 >% 0.045 0.01
+                      size %<= doorThickness / 4 >% 0.01 0.01
                     }
+                  }
+                  Connector{
+                    autoLock TRUE
+                    isLocked TRUE
                   }
                 ]
                 boundingObject USE LOCK
