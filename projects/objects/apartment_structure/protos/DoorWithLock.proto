@@ -28,7 +28,7 @@ PROTO DoorWithLock [
   field SFNode     doorAppearance         GenericDoorAppearance {}  # Defines the door's appearance.
   field SFNode     wallAppearance         Roughcast {}              # Defines the wall's appearance.
   field SFNode     frameAppearance        VarnishedPine {}          # Defines the frame's appearance.
-  field SFNode     doorHandle             DoorLever {}              # Defines an optional door handle.
+  field SFNode     doorHandle             DoorLever { canTurn TRUE }              # Defines an optional door handle.
   field MFNode     doorSlot               []                        # Extends the door with new nodes.
   field SFBool     castShadows            TRUE                      # Defines whether this object should cast shadows.
 ]
@@ -139,6 +139,8 @@ PROTO DoorWithLock [
             translation %<= frameSize.x + size.x / 2 - doorThickness / 4 + 0.001 >% %<= - frameSize.y / 2 + 0.005 >% 0.02
             autoLock TRUE
             isLocked TRUE
+            model "door lock"
+            shearStrength 10
           }
         ]
         boundingObject Group {
