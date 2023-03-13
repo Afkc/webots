@@ -21,6 +21,7 @@ PROTO DoorLever [
   field SFFloat    mass             0.7                  # Defines the mass of the lever.
   field SFBool     hasStaticParent  FALSE                # Defines whether the parent door has physics or not.
   field SFBool     castShadows      TRUE                 # Defines whether this object should cast shadows.
+  field SFBool     uShape           FALSE                # Defines wether the lever should have a `L` or `U` shape.
 ]
 {
   %<
@@ -51,6 +52,7 @@ PROTO DoorLever [
     const mirrorFactor = fields.jointAtLeft.value ? -1 : 1;
 
     const axisHeight = distanceFromDoor * 2 + doorThickness;
+    const uLenght = distanceFromDoor / 2;
     const handlePositionX = axisHeight * 0.5;
     const handlePositionY = handleLength * 0.5;
   >%
@@ -152,6 +154,34 @@ PROTO DoorLever [
                   }
                 ]
               }
+              %< if (fields.uShape.value) { >%
+                DEF FRONT_U_HANDLE Transform {
+                  translation %<= -handlePositionX + uLenght / 2 >% %<= -handleLength >% 0
+                  rotation 0 1 0 1.57
+                  children [
+                    Shape {
+                      appearance IS appearance
+                      geometry Capsule {
+                        radius %<= handleThickness >%
+                        height %<= uLenght >%
+                      }
+                    }
+                  ]
+                }
+                DEF BACK_U_HANDLE Transform {
+                  translation %<= handlePositionX -uLenght / 2 >% %<= -handleLength >% 0
+                  rotation 0 1 0 1.57
+                  children [
+                    Shape {
+                      appearance IS appearance
+                      geometry Capsule {
+                        radius %<= handleThickness >%
+                        height %<= uLenght >%
+                      }
+                    }
+                  ]
+                }
+              %< } >%
     %< if (fields.canTurn.value) { >%
             ]
             boundingObject Group {
@@ -159,6 +189,10 @@ PROTO DoorLever [
                 USE HANDLE_AXIS
                 USE BACK_HANDLE
                 USE FRONT_HANDLE
+                %< if (fields.uShape.value) { >%
+                USE FRONT_U_HANDLE
+                USE BACK_U_HANDLE
+                %< } >%
               ]
             }
             physics Physics {
@@ -182,6 +216,10 @@ PROTO DoorLever [
           USE HANDLE_AXIS
           USE BACK_HANDLE
           USE FRONT_HANDLE
+          %< if (fields.uShape.value) { >%
+          USE FRONT_U_HANDLE
+          USE BACK_U_HANDLE
+          %< } >%
         ]
       }
       %< if (!fields.hasStaticParent.value) { >%
