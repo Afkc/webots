@@ -140,7 +140,7 @@ PROTO DoorWithLock [
             autoLock TRUE
             isLocked TRUE
             model "door lock"
-            shearStrength 10
+            tensileStrength 1
           }
         ]
         boundingObject Group {

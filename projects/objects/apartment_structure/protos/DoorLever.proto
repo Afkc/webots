@@ -106,7 +106,8 @@ PROTO DoorLever [
                     autoLock TRUE
                     isLocked TRUE
                     model "door lock"
-                    shearStrength 10
+                    distanceTolerance 0.02
+                    tensileStrength 1
                   }
                 ]
                 boundingObject USE LOCK
