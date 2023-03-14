@@ -141,6 +141,7 @@ PROTO DoorWithLock [
             isLocked TRUE
             model "door lock"
             tensileStrength 1
+            distanceTolerance 0.05
           }
         ]
         boundingObject Group {

@@ -102,11 +102,10 @@ PROTO DoorLever [
                     }
                   }
                   Connector{
-                    translation -0.01 0 0
+                    translation -0.05 0 0
                     autoLock TRUE
                     isLocked TRUE
                     model "door lock"
-                    distanceTolerance 0.02
                     tensileStrength 1
                   }
                 ]
