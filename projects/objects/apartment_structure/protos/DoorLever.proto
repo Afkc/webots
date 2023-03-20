@@ -94,7 +94,7 @@ PROTO DoorLever [
           endPoint Solid {
             children [
               Solid {
-                translation %<= -doorThickness / 2 + doorThickness / 8  + 0.001>% 0.055 0.02
+                translation %<= -doorThickness / 2 + doorThickness / 8 + 0.001>% 0.055 0.02
                 children [
                   Shape {
                     appearance IS appearance
@@ -103,10 +103,11 @@ PROTO DoorLever [
                     }
                   }
                   Connector{
-                    translation -0.05 0 0
+                    translation 1.95 0 0
                     autoLock TRUE
                     isLocked TRUE
                     model "door lock"
+                    type "passive"
                     tensileStrength 1
                   }
                 ]

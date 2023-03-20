@@ -136,12 +136,14 @@ PROTO DoorWithLock [
           }
           Connector {
             rotation 0 0 1 3.1415926535
-            translation %<= frameSize.x + size.x / 2 - doorThickness / 4 + 0.001 >% %<= - frameSize.y / 2 + 0.005 >% 0.02
+            translation %<= frameSize.x + size.x / 2 - doorThickness / 4 + 0.001 + 1.945 >% %<= - frameSize.y / 2 + 0.005 >% 0.02
             autoLock TRUE
             isLocked TRUE
             model "door lock"
-            tensileStrength 1
-            distanceTolerance 0.05
+            type "active"
+            tensileStrength 0.01
+            distanceTolerance 0.005
+            snap FALSE
           }
         ]
         boundingObject Group {
