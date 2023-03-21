@@ -104,8 +104,6 @@ PROTO DoorLever [
                   }
                   Connector{
                     translation 1.95 0 0
-                    autoLock TRUE
-                    isLocked TRUE
                     model "door lock"
                     type "passive"
                     tensileStrength 1
