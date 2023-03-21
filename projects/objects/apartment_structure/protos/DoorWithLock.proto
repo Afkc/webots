@@ -139,7 +139,7 @@ PROTO DoorWithLock [
             translation %<= frameSize.x + size.x / 2 - doorThickness / 4 + 0.001 + 1.945 >% %<= - frameSize.y / 2 + 0.005 >% 0.02
             model "door lock"
             type "passive"
-            tensileStrength 0.001
+            tensileStrength 0
           }
         ]
         boundingObject Group {
