@@ -87,7 +87,7 @@ PROTO DoorLever [
           %< } >%
             minStop -0.03
             maxStop 0.6109
-            springConstant 10
+            springConstant 5
             dampingConstant 0.5
             staticFriction 0.05
           }
@@ -104,9 +104,13 @@ PROTO DoorLever [
                   }
                   Connector{
                     translation 1.95 0 0
+                    autoLock TRUE
+                    isLocked TRUE
                     model "door lock"
-                    type "passive"
-                    tensileStrength 1
+                    type "active"
+                    tensileStrength 0.001
+                    distanceTolerance 0.005
+                    snap FALSE
                   }
                 ]
                 boundingObject USE LOCK
