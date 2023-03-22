@@ -94,15 +94,25 @@ PROTO DoorLever [
           endPoint Solid {
             children [
               Connector{
-                translation %<= -doorThickness / 2 + doorThickness / 8 + 0.001 + 1.95 >% 0.055 0.02
+                translation %<= -doorThickness / 2 + doorThickness / 8 + 0.001 + 1.95 >% 0.05534 0.01929
                 autoLock TRUE
                 isLocked TRUE
                 model "door lock"
                 type "active"
                 tensileStrength 0
                 distanceTolerance 0.005
-                axisTolerance 0
+                axisTolerance 0.00001
                 snap FALSE
+                children [
+                  Shape {
+                    geometry Box {
+                      size 0.01 0.01 0.01
+                    }
+                    appearance PBRAppearance {
+                     transparency 1
+                    }
+                  }
+                ]
               }
               Solid {
                 translation %<= -doorThickness / 2 + doorThickness / 8 + 0.001>% 0.055 0.02
