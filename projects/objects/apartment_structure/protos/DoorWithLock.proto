@@ -223,6 +223,7 @@ PROTO DoorWithLock [
                 children IS doorSlot
               }
             ]
+            contactMaterial "door"
             boundingObject Group {
               children [
                 Transform {
