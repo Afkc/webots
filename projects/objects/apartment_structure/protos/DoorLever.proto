@@ -197,7 +197,6 @@ PROTO DoorLever [
                   ]
                 }
               %< } >%
-              contactMaterial "doorHandle"
     %< if (fields.canTurn.value) { >%
             ]
             boundingObject Group {
@@ -245,6 +244,7 @@ PROTO DoorLever [
       }
       %< } >%
     %< } >%
+      contactMaterial "doorHandle"
       name IS name
       model "door lever"
     }
